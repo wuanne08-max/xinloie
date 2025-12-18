@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Anh xin lỗi em</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e8,#ffeef5);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow:hidden;
+}
+
+/* ====== THƯ MỞ ĐẦU ====== */
+#letterScreen{
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ffd6e8,#ffeef5);
+    z-index:2000;
+}
+
+.letter{
+    width:360px;
+    height:260px;
+    background:#fff;
+    border-radius:22px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.25);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    animation: float 2s infinite;
+    transition:all 0.8s ease;
+}
+
+.letter span{
+    font-size:70px;
+}
+
+.letter p{
+    font-size:18px;
+    font-weight:bold;
+    color:#ff4d88;
+}
+
+.letter.open{
+    transform:scale(1.6) rotate(6deg);
+    opacity:0;
+}
+
+@keyframes float{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+/* ====== CARD CHÍNH ====== */
+.card{
+    background:#fff;
+    width:90%;
+    max-width:420px;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.15);
+    text-align:center;
+    display:none;
+}
+
+h1{color:#ff4d88}
+
+p{color:#444; line-height:1.6}
+
+button{
+    margin:10px;
+    padding:12px 22px;
+    border:none;
+    border-radius:30px;
+    background:#ff4d88;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+button:hover{transform:scale(1.08)}
+
+.hidden{
+    display:none;
+    color:#ff4d88;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+/* ====== TIM BAY ====== */
+#hearts{
+    position:fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:999;
+}
+
+.heart{
+    position:absolute;
+    bottom:-20px;
+    animation:fly 4s linear forwards;
+}
+
+@keyframes fly{
+    0%{transform:translateY(0) scale(0.7); opacity:1}
+    100%{transform:translateY(-110vh) scale(1.4); opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- THƯ -->
+<div id="letterScreen">
+    <div class="letter" id="letter" onclick="openLetter()">
+        <span></span>
+        <p>Em bấm vô đây nha</p>
+    </div>
+</div>
+
+<!-- NỘI DUNG -->
+<div class="card" id="mainContent">
+    <h1>Gửi em </h1>
+
+    <p>
+        a xin loiii hoia annn xinh gai ạ nãy a có lỡ lời với emmmm nên mong e bỏ qua biết tsao a hay xin lỗi không do a cx là 1 người con trai nên khi làm sai gì chỉ biết xin lỗi thoi nên mong e bỏ qua cho a lần nay ạ a biêt a chỉ mới quen em thôi nhưng mà a nói chuyenj tào lao gì không đố là lỗi của anh anh đã không suy nghĩ kỹ về cảm xúc của em, không đặt mình vào vị trí của em để hiểu rằng những lời nói đó có thể khiến em tổn thương và mất thiện cảm dù anh có nghĩ là nói thật hay chỉ là đùa, thì nếu điều đó làm em không thoải mái, anh cần dừng lại và sửa sai nếu em sẵn sàng a mong được nói chuyện lại với e một cách bth để hiểu nhau hơnd ù quyết định của em thế nào anh vẫn tôn trọng anh thật lòng xin lỗi và mong em cảm nhận được sự chân thành của a
+
+    <p><b>Tha lỗi cho anh không?</b></p>
+
+    <button onclick="showLove(80)">Coooo</button>
+    <button onclick="showLove(80)">Kooo</button>
+
+    <div class="hidden" id="loveText">
+        Cảm ơn emmm:)) 
+        
+    </div>
+</div>
+
+<div id="hearts"></div>
+
+<script>
+function openLetter(){
+    const letter = document.getElementById("letter");
+    letter.classList.add("open");
+
+    setTimeout(()=>{
+        document.getElementById("letterScreen").style.display="none";
+        document.getElementById("mainContent").style.display="block";
+    },800);
+}
+
+function showLove(amount){
+    document.getElementById("loveText").style.display="block";
+    for(let i=0;i<amount;i++){
+        setTimeout(createHeart,i*25);
+    }
+}
+
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML=["❤️","💖","💕","💘","💗"][Math.floor(Math.random()*5)];
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(20+Math.random()*30)+"px";
+    document.getElementById("hearts").appendChild(heart);
+    setTimeout(()=>heart.remove(),4000);
+}
+</script>
+
+</body>
+</html>
